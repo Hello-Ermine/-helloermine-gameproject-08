@@ -7,6 +7,8 @@ let player1;
 let player2;
 
 let shuriken;
+let shurikenGroupP1;
+let shurikenGroupP2;
 
 let keyW;
 let keyA;
@@ -19,6 +21,12 @@ let keyM;
 
 let directionP1 = 'right';
 let directionP2 = 'left';
+
+let hitP1;
+let hitP2;
+
+let player1HealthBar = 10;
+let player2HealthBar = 10;
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -142,6 +150,9 @@ class GameScene extends Phaser.Scene {
             repeat: -1
         })
 
+        shurikenGroupP1 = this.physics.add.group();
+        shurikenGroupP2 = this.physics.add.group();
+
         player1.setCollideWorldBounds(true)
         player2.setCollideWorldBounds(true)
 
@@ -159,6 +170,24 @@ class GameScene extends Phaser.Scene {
     }
 
     update(delta, time) {
+        hitP2 = this.physics.add.overlap(shurikenGroupP1, player2, (S, R)=>{
+            R.destroy();
+            player2HealthBar--;   
+            if(player2HealthBar<=0){
+                console.log('Player1 Win');
+            }
+            console.log(player2HealthBar);
+        })
+
+        hitP1 = this.physics.add.overlap(shurikenGroupP2, player1, (S, R)=>{
+            R.destroy();   
+            player1HealthBar--;
+            if(player1HealthBar<=0){
+                console.log('Player2 Win');
+            }
+            console.log(player1HealthBar);
+        })
+
         //player1
         if (keyW.isDown) {
             player1.setVelocityY(-500);
@@ -197,7 +226,8 @@ class GameScene extends Phaser.Scene {
                 shuriken = this.physics.add.sprite(player1.x, player1.y, 'shuriken');
                 shuriken.anims.play('shurikenAni', true);
                 shuriken.setScale(0.2);
-                shuriken.setVelocityX(-600);
+                shurikenGroupP1.add(shuriken);
+                shurikenGroupP1.setVelocityX(-600);
                 // bulletL = this.physics.add.image(player1.x - 100, player1.y, 'bullet')
                 // .setScale(0.1);
                 // bulletL.setVelocityX(-800);
@@ -206,7 +236,8 @@ class GameScene extends Phaser.Scene {
                 shuriken = this.physics.add.sprite(player1.x, player1.y, 'shuriken');
                 shuriken.anims.play('shurikenAni', true);
                 shuriken.setScale(0.2);
-                shuriken.setVelocityX(600);
+                shurikenGroupP1.add(shuriken);
+                shurikenGroupP1.setVelocityX(600);
                 // bulletR = this.physics.add.image(player1.x + 100, player1.y, 'bulletR')
                 // .setScale(0.1);
                 // bulletR.setVelocityX(800);
@@ -239,13 +270,32 @@ class GameScene extends Phaser.Scene {
                 shuriken = this.physics.add.sprite(player2.x, player2.y, 'shuriken');
                 shuriken.anims.play('shurikenAni', true);
                 shuriken.setScale(0.2);
-                shuriken.setVelocityX(-600);
+                shurikenGroupP2.add(shuriken);
+                shurikenGroupP2.setVelocityX(-600);
             }
             else {
                 shuriken = this.physics.add.sprite(player2.x, player2.y, 'shuriken');
                 shuriken.anims.play('shurikenAni', true);
                 shuriken.setScale(0.2);
-                shuriken.setVelocityX(600);
+                shurikenGroupP2.add(shuriken);
+                shurikenGroupP2.setVelocityX(600);
+            }
+        }
+        for (let i = 0; i < shurikenGroupP1.getChildren().length; i++) {
+            if (shurikenGroupP1.getChildren()[i].x < 0) {
+                    shurikenGroupP1.getChildren()[i].destroy();
+            }
+            else if(shurikenGroupP1.getChildren()[i].x > 1280) {
+                shurikenGroupP1.getChildren()[i].destroy();
+            }
+        }
+
+        for (let j = 0; j < shurikenGroupP2.getChildren().length; j++) {
+            if (shurikenGroupP2.getChildren()[j].x < 0) {
+                    shurikenGroupP2.getChildren()[j].destroy();
+            }
+            else if(shurikenGroupP2.getChildren()[j].x > 1280) {
+                shurikenGroupP2.getChildren()[j].destroy();
             }
         }
     }
