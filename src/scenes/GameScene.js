@@ -6,9 +6,6 @@ let player1;
 
 let player2;
 
-let bulletL;
-let bulletR;
-
 let shuriken;
 
 let keyW;
