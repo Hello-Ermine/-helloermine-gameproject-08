@@ -6,6 +6,9 @@ let player1;
 
 let player2;
 
+let timeShuriken = 0;
+let delayShuriken = 2000;
+
 let shuriken;
 let shurikenGroupP1;
 let shurikenGroupP2;
@@ -44,25 +47,25 @@ class GameScene extends Phaser.Scene {
     preload() {
         this.load.image('bg', 'src/image/BG/bg.jpg');
 
-        this.load.spritesheet('player1R', 'src/image/player/ninjaR.png',
-            { frameWidth: 184.5, frameHeight: 224 });
+        this.load.spritesheet('player1R', 'src/image/player/ninjaR.png', { frameWidth: 184.5, frameHeight: 224 });
 
-        this.load.spritesheet('player1L', 'src/image/player/ninjaL.png',
-            { frameWidth: 184.5, frameHeight: 224 });
+        this.load.spritesheet('player1L', 'src/image/player/ninjaL.png', { frameWidth: 184.5, frameHeight: 224 });
 
-        this.load.spritesheet('player2R', 'src/image/player/ninjaR.png',
-            { frameWidth: 184.5, frameHeight: 224 });
+        this.load.spritesheet('player2R', 'src/image/player/ninjaR.png', { frameWidth: 184.5, frameHeight: 224 });
 
-        this.load.spritesheet('player2L', 'src/image/player/ninjaL.png',
-            { frameWidth: 184.5, frameHeight: 224 });
+        this.load.spritesheet('player2L', 'src/image/player/ninjaL.png', { frameWidth: 184.5, frameHeight: 224 });
 
-        this.load.spritesheet('shuriken', 'src/image/Bullet/shuriken.png',
-        { frameWidth: 311.5, frameHeight: 332 });
+        this.load.spritesheet('shuriken', 'src/image/Bullet/shuriken.png', { frameWidth: 311.5, frameHeight: 332 });
+
+        this.load.spritesheet('ShootingR', 'src/image/Player/ShootR.png', {
+            frameWidth: 250,
+            frameHeight: 333
+        });
     }
 
     create() {
         bg = this.add.image(-30, -100, 'bg');
-        bg.setOrigin(0,0);
+        bg.setOrigin(0, 0);
         bg.setScale(0.68);
 
         player1 = this.physics.add.sprite(425, 800, 'player1L').setScale(0.8);
@@ -88,13 +91,14 @@ class GameScene extends Phaser.Scene {
 
         this.anims.create({
             key: 'player1AniShootR',
-            frames: this.anims.generateFrameNumbers('player1R', {
-                start: 5,
-                end: 5
+            frames: this.anims.generateFrameNumbers('ShootingR', {
+                start: 0,
+                end: 2
             }),
-            duration: 100,
-            delay: 1000,
-            repeat: -1
+            duration: 2000,
+            framerate: 1,
+            repeat: 10,
+            callbackScope: this,
         })
 
         this.anims.create({
@@ -174,7 +178,7 @@ class GameScene extends Phaser.Scene {
 
         shurikenGroupP1L = this.physics.add.group();
         shurikenGroupP1R = this.physics.add.group();
-        
+
         shurikenGroupP2L = this.physics.add.group();
         shurikenGroupP2R = this.physics.add.group();
 
@@ -192,49 +196,49 @@ class GameScene extends Phaser.Scene {
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        
+
 
 
     }
 
     update(delta, time) {
-        this.physics.add.overlap(shurikenGroupP1R, player2, (S, R)=>{
+        this.physics.add.overlap(shurikenGroupP1R, player2, (S, R) => {
             R.destroy();
-            player2HealthBar--;   
-            if(player2HealthBar<=0){
+            player2HealthBar--;
+            if (player2HealthBar <= 0) {
                 console.log('Player1 Win');
             }
             console.log('Health Player2 : ' + player2HealthBar);
         })
 
-        this.physics.add.overlap(shurikenGroupP1L, player2, (S, R)=>{
+        this.physics.add.overlap(shurikenGroupP1L, player2, (S, R) => {
             R.destroy();
-            player2HealthBar--;   
-            if(player2HealthBar<=0){
+            player2HealthBar--;
+            if (player2HealthBar <= 0) {
                 console.log('Player1 Win');
             }
             console.log('Health Player2 : ' + player2HealthBar);
         })
 
-        this.physics.add.overlap(shurikenGroupP2R, player1, (S, R)=>{
-            R.destroy();   
+        this.physics.add.overlap(shurikenGroupP2R, player1, (S, R) => {
+            R.destroy();
             player1HealthBar--;
-            if(player1HealthBar<=0){
+            if (player1HealthBar <= 0) {
                 console.log('Player2 Win');
             }
             console.log('Health Player1 : ' + player1HealthBar);
         })
 
-        this.physics.add.overlap(shurikenGroupP2L, player1, (S, R)=>{
-            R.destroy();   
+        this.physics.add.overlap(shurikenGroupP2L, player1, (S, R) => {
+            R.destroy();
             player1HealthBar--;
-            if(player1HealthBar<=0){
+            if (player1HealthBar <= 0) {
                 console.log('Player2 Win');
             }
             console.log('Health Player1 : ' + player1HealthBar);
         })
 
-        this.physics.add.overlap(shurikenGroupP1, shurikenGroupP2, (S, R)=> {
+        this.physics.add.overlap(shurikenGroupP1, shurikenGroupP2, (S, R) => {
             R.destroy();
             S.destroy();
         })
@@ -258,8 +262,8 @@ class GameScene extends Phaser.Scene {
             //     bulletL.setVelocityX(-500);
             // }
             directionP1 = 'left'
-            
-        }else if (keyD.isDown) {
+
+        } else if (keyD.isDown) {
             player1.setVelocityX(500);
             player1.anims.play('player1AniRight', true);
             // if (Phaser.Input.Keyboard.JustDown(keySpace)) {
@@ -269,36 +273,56 @@ class GameScene extends Phaser.Scene {
             // }
             directionP1 = 'right'
         } else {
-            player1.anims.play('player1AniUp', true);
             player1.setVelocityX(0);
         }
 
-        if(Phaser.Input.Keyboard.JustDown(keySpace)) {
-            if(directionP1==='left') {
-                shuriken = this.physics.add.sprite(player1.x, player1.y, 'shuriken');
-                shuriken.setSize(220,220);
-                shuriken.anims.play('shurikenAni', true);
-                shuriken.setScale(0.2);
-                shurikenGroupP1L.add(shuriken);
-                shurikenGroupP1L.setVelocityX(-400);
+        if (keySpace.isDown && delta >= (timeShuriken + delayShuriken)) {
+            if (directionP1 === 'left') {
                 player1.anims.play('player1AniShootL', true);
                 // bulletL = this.physics.add.image(player1.x - 100, player1.y, 'bullet')
                 // .setScale(0.1);
                 // bulletL.setVelocityX(-800);
-            }
-            else {
-                shuriken = this.physics.add.sprite(player1.x, player1.y, 'shuriken');
-                shuriken.setSize(220,220);
-                shuriken.anims.play('shurikenAni', true);
-                shuriken.setScale(0.2);
-                shurikenGroupP1R.add(shuriken);
-                shurikenGroupP1R.setVelocityX(400);
+            } else {
                 player1.anims.play('player1AniShootR', true);
+                this.time.addEvent({
+                    delay: 2000,
+                    callback: function() {
+                        player1.anims.play('player1AniUp', true);
+                    },
+                    callbackScope: this,
+                    loop: false,
+                });
                 // bulletR = this.physics.add.image(player1.x + 100, player1.y, 'bulletR')
                 // .setScale(0.1);
                 // bulletR.setVelocityX(800);
             }
+            timeShuriken = delta;
         }
+
+        // if (Phaser.Input.Keyboard.JustDown(keySpace) && delta >= (timeShuriken + delayShuriken)) {
+        //     if (directionP1 === 'left') {
+        //         shuriken = this.physics.add.sprite(player1.x, player1.y, 'shuriken');
+        //         shuriken.setSize(220, 220);
+        //         shuriken.anims.play('shurikenAni', true);
+        //         shuriken.setScale(0.2);
+        //         shurikenGroupP1L.add(shuriken);
+        //         shurikenGroupP1L.setVelocityX(-400);
+        //         // bulletL = this.physics.add.image(player1.x - 100, player1.y, 'bullet')
+        //         // .setScale(0.1);
+        //         // bulletL.setVelocityX(-800);
+        //     } else {
+        //         shuriken = this.physics.add.sprite(player1.x, player1.y, 'shuriken');
+        //         shuriken.setSize(220, 220);
+        //         shuriken.anims.play('shurikenAni', true);
+        //         shuriken.setScale(0.2);
+        //         shurikenGroupP1R.add(shuriken);
+        //         shurikenGroupP1R.setVelocityX(400);
+        //         // bulletR = this.physics.add.image(player1.x + 100, player1.y, 'bulletR')
+        //         // .setScale(0.1);
+        //         // bulletR.setVelocityX(800);
+        //     }
+        //     timeShuriken = delta;
+        // }
 
         //player2
         if (cursor.up.isDown) {
@@ -322,18 +346,17 @@ class GameScene extends Phaser.Scene {
             player2.setVelocityX(0);
             player2.anims.play('player2AniUp', true);
         }
-        if(Phaser.Input.Keyboard.JustDown(keyM)) {
-            if(directionP2==='left') {
+        if (Phaser.Input.Keyboard.JustDown(keyM)) {
+            if (directionP2 === 'left') {
                 shuriken = this.physics.add.sprite(player2.x, player2.y, 'shuriken');
-                shuriken.setSize(220,220);
+                shuriken.setSize(220, 220);
                 shuriken.anims.play('shurikenAni', true);
                 shuriken.setScale(0.2);
                 shurikenGroupP2L.add(shuriken);
                 shurikenGroupP2L.setVelocityX(-400);
-            }
-            else {
+            } else {
                 shuriken = this.physics.add.sprite(player2.x, player2.y, 'shuriken');
-                shuriken.setSize(220,220);
+                shuriken.setSize(220, 220);
                 shuriken.anims.play('shurikenAni', true);
                 shuriken.setScale(0.2);
                 shurikenGroupP2R.add(shuriken);
@@ -343,8 +366,7 @@ class GameScene extends Phaser.Scene {
         for (let i = 0; i < shurikenGroupP1R.getChildren().length; i++) {
             if (shurikenGroupP1R.getChildren()[i].x < 0) {
                 shurikenGroupP1R.getChildren()[i].destroy();
-            }
-            else if(shurikenGroupP1R.getChildren()[i].x > 1280) {
+            } else if (shurikenGroupP1R.getChildren()[i].x > 1280) {
                 shurikenGroupP1R.getChildren()[i].destroy();
             }
         }
@@ -352,8 +374,7 @@ class GameScene extends Phaser.Scene {
         for (let j = 0; j < shurikenGroupP1L.getChildren().length; j++) {
             if (shurikenGroupP1L.getChildren()[j].x < 0) {
                 shurikenGroupP1L.getChildren()[j].destroy();
-            }
-            else if(shurikenGroupP1L.getChildren()[j].x > 1280) {
+            } else if (shurikenGroupP1L.getChildren()[j].x > 1280) {
                 shurikenGroupP1L.getChildren()[j].destroy();
             }
         }
@@ -361,8 +382,7 @@ class GameScene extends Phaser.Scene {
         for (let k = 0; k < shurikenGroupP2R.getChildren().length; k++) {
             if (shurikenGroupP2R.getChildren()[k].x < 0) {
                 shurikenGroupP2R.getChildren()[k].destroy();
-            }
-            else if(shurikenGroupP2R.getChildren()[k].x > 1280) {
+            } else if (shurikenGroupP2R.getChildren()[k].x > 1280) {
                 shurikenGroupP2R.getChildren()[k].destroy();
             }
         }
@@ -370,12 +390,11 @@ class GameScene extends Phaser.Scene {
         for (let l = 0; l < shurikenGroupP2L.getChildren().length; l++) {
             if (shurikenGroupP2L.getChildren()[l].x < 0) {
                 shurikenGroupP2L.getChildren()[l].destroy();
-            }
-            else if(shurikenGroupP2L.getChildren()[l].x > 1280) {
+            } else if (shurikenGroupP2L.getChildren()[l].x > 1280) {
                 shurikenGroupP2L.getChildren()[l].destroy();
             }
         }
-    
+
     }
 }
 export default GameScene;
