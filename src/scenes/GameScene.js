@@ -37,7 +37,7 @@ let hitP2;
 let player1HealthBar = 10;
 let player2HealthBar = 10;
 
-let test=0;
+let test = 0;
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -246,52 +246,52 @@ class GameScene extends Phaser.Scene {
         })
 
         //player1
-        if(test==0){
-        if (keyW.isDown) {
-            player1.setVelocityY(-500);
-            player1.anims.play('player1AniUp', true);
-        } else if (keyS.isDown) {
-            player1.setVelocityY(500);
-            player1.anims.play('player1AniDown', true);
-        } else {
-            player1.setVelocityY(0);
-        }
-        if (keyA.isDown) {
-            player1.setVelocityX(-500);
-            player1.anims.play('player1AniLeft', true);
-            // if (Phaser.Input.Keyboard.JustDown(keySpace)) {
-            //     bulletL = this.physics.add.image(player1.x - 50, player1.y, 'bullet')
-            //     bulletL.setScale(0.1);
-            //     bulletL.setVelocityX(-500);
-            // }
-            directionP1 = 'left'
+        if (test == 0) {
+            if (keyW.isDown) {
+                player1.setVelocityY(-500);
+                player1.anims.play('player1AniUp', true);
+            } else if (keyS.isDown) {
+                player1.setVelocityY(500);
+                player1.anims.play('player1AniDown', true);
+            } else {
+                player1.setVelocityY(0);
+            }
+            if (keyA.isDown) {
+                player1.setVelocityX(-500);
+                player1.anims.play('player1AniLeft', true);
+                // if (Phaser.Input.Keyboard.JustDown(keySpace)) {
+                //     bulletL = this.physics.add.image(player1.x - 50, player1.y, 'bullet')
+                //     bulletL.setScale(0.1);
+                //     bulletL.setVelocityX(-500);
+                // }
+                directionP1 = 'left'
 
-        } else if (keyD.isDown) {
-            player1.setVelocityX(500);
-            player1.anims.play('player1AniRight', true);
-            // if (Phaser.Input.Keyboard.JustDown(keySpace)) {
-            //     bulletR = this.physics.add.image(player1.x + 50, player1.y, 'bulletR')
-            //     bulletR.setScale(0.1);
-            //     bulletR.setVelocityX(500);
-            // }
-            directionP1 = 'right'
-        } else {
-                player1.anims.play('player1AniUp',true);
+            } else if (keyD.isDown) {
+                player1.setVelocityX(500);
+                player1.anims.play('player1AniRight', true);
+                // if (Phaser.Input.Keyboard.JustDown(keySpace)) {
+                //     bulletR = this.physics.add.image(player1.x + 50, player1.y, 'bulletR')
+                //     bulletR.setScale(0.1);
+                //     bulletR.setVelocityX(500);
+                // }
+                directionP1 = 'right'
+            } else {
+                player1.anims.play('player1AniUp', true);
                 player1.setVelocityX(0);
+            }
         }
-    }
         if (keySpace.isDown && delta >= (timeShuriken + delayShuriken)) {
-                test=1;
-                player1.anims.play('player1AniShootR', true);
-                this.time.addEvent({
-                    delay: 650,
-                    callback: function() {
-                        player1.anims.play('player1AniUp', true);
-                        test=0;
-                    },
-                    callbackScope: this,
-                    loop: false,
-                });
+            test = 1;
+            player1.anims.play('player1AniShootR', true);
+            this.time.addEvent({
+                delay: 300,
+                callback: function() {
+                    player1.anims.play('player1AniUp', true);
+                    test = 0;
+                },
+                callbackScope: this,
+                loop: false,
+            });
             timeShuriken = delta;
         }
 
