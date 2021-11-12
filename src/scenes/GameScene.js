@@ -7,7 +7,7 @@ let player1;
 let player2;
 
 let timeShuriken = 0;
-let delayShuriken = 2000;
+let delayShuriken = 1000;
 
 let shuriken;
 let shurikenGroupP1;
@@ -36,6 +36,8 @@ let hitP2;
 
 let player1HealthBar = 10;
 let player2HealthBar = 10;
+
+let test=0;
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -95,7 +97,7 @@ class GameScene extends Phaser.Scene {
                 start: 0,
                 end: 2
             }),
-            duration: 2000,
+            duration: 650,
             framerate: 1,
             repeat: 10,
             callbackScope: this,
@@ -244,6 +246,7 @@ class GameScene extends Phaser.Scene {
         })
 
         //player1
+        if(test==0){
         if (keyW.isDown) {
             player1.setVelocityY(-500);
             player1.anims.play('player1AniUp', true);
@@ -273,29 +276,22 @@ class GameScene extends Phaser.Scene {
             // }
             directionP1 = 'right'
         } else {
-            player1.setVelocityX(0);
+                player1.anims.play('player1AniUp',true);
+                player1.setVelocityX(0);
         }
-
+    }
         if (keySpace.isDown && delta >= (timeShuriken + delayShuriken)) {
-            if (directionP1 === 'left') {
-                player1.anims.play('player1AniShootL', true);
-                // bulletL = this.physics.add.image(player1.x - 100, player1.y, 'bullet')
-                // .setScale(0.1);
-                // bulletL.setVelocityX(-800);
-            } else {
+                test=1;
                 player1.anims.play('player1AniShootR', true);
                 this.time.addEvent({
-                    delay: 2000,
+                    delay: 650,
                     callback: function() {
                         player1.anims.play('player1AniUp', true);
+                        test=0;
                     },
                     callbackScope: this,
                     loop: false,
                 });
-                // bulletR = this.physics.add.image(player1.x + 100, player1.y, 'bulletR')
-                // .setScale(0.1);
-                // bulletR.setVelocityX(800);
-            }
             timeShuriken = delta;
         }
 
