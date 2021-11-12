@@ -23,8 +23,6 @@ class GameScene extends Phaser.Scene {
             player1 = this.physics.add.image(200, 300, 'nong');
             //console.log(player1Selected);
         }
-        player1.setVelocityX(100);
-
     }
 
     update(delta, time) {
