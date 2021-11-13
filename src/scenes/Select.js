@@ -44,7 +44,6 @@ class Select extends Phaser.Scene {
     }
 
     create() {
-        selectNum = 1;
         //-----------------------------------------------------------------Background
         s_bg = this.add.image(630, 400, 's_bg')
             .setScale(0.8);
@@ -140,28 +139,28 @@ class Select extends Phaser.Scene {
             selectNum++;
         });
         //-----------------------------------------------------------------
-
     }
 
     update(delta, time) {
         console.log(selectNum);
         if (selectNum % 3 === 2) {
-            selectedShuriken = "shuriken1"
             shuriken1.setVisible(1);
             shuriken2.setVisible();
             shuriken3.setVisible();
+            selectedShuriken = "shuriken1"
             console.log(selectedShuriken);
         } else if (selectNum % 3 === 1) {
-            selectNum = "shuriken2"
             shuriken1.setVisible();
             shuriken2.setVisible(1);
             shuriken3.setVisible();
+            selectNum = "shuriken2"
             console.log(selectedShuriken);
         } else {
             selectNum = "shuriken3"
             shuriken1.setVisible();
             shuriken2.setVisible();
             shuriken3.setVisible(1);
+            selectNum = "shuriken3"
             console.log(selectedShuriken);
         }
     }
