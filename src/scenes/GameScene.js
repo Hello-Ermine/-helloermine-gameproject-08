@@ -97,7 +97,7 @@ class GameScene extends Phaser.Scene {
                 start: 0,
                 end: 2
             }),
-            duration: 400,
+            duration: 1000,
             framerate: 1,
             repeat: 10,
             callbackScope: this,
@@ -109,7 +109,7 @@ class GameScene extends Phaser.Scene {
                 start: 0,
                 end: 0
             }),
-            duration: 400,
+            duration: 1000,
             delay: 1000,
             repeat: -1
         })
@@ -288,11 +288,7 @@ class GameScene extends Phaser.Scene {
                 // }
                 directionP1 = 'right'
             } else {
-                if (directionP1 === 'right') {
-                    player1.anims.play('player1AniUp', true);
-                } else {
-                    player1.anims.play('player1AniUpL', true);
-                }
+                player1.anims.play('player1AniUp', true);
                 player1.setVelocityX(0);
             }
         }
