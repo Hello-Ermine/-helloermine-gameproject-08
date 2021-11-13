@@ -166,7 +166,7 @@ class Select extends Phaser.Scene {
 
         startButton.on('pointerdown', () => {
             startButton.setScale(0.5);
-            this.scene.start('Select');
+            //this.scene.start('Select');
         })
 
     }
@@ -196,4 +196,5 @@ class Select extends Phaser.Scene {
         //-----------------------------------------------------------------
     }
 }
+export default { selectedShuriken };
 export default Select;

@@ -19,8 +19,9 @@ const config = {
         }
     },
     scene: [
-        MainMenu,
-        Select
+        // MainMenu,
+        Select,
+        test
     ],
 
 };
