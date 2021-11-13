@@ -19,7 +19,7 @@ const config = {
         }
     },
     scene: [
-        //MainMenu,
+        MainMenu,
         Select
     ],
 

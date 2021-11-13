@@ -44,7 +44,7 @@ class MainMenu extends Phaser.Scene {
 
         start_button.on('pointerdown', () => {
             start_button.setScale(1);
-            m_bg.stop();
+            //m_bg.stop();
             this.scene.start('Select');
         })
 

@@ -9,9 +9,13 @@ let shuriken3;
 let arrowL;
 let arrowR;
 
-let selectNum;
+let startButton;
+
+let selectNum = 100;
 
 let selectedShuriken = 'shuriken1';
+
+let selectShuriken;
 
 class Select extends Phaser.Scene {
     constructor(test) {
@@ -41,6 +45,10 @@ class Select extends Phaser.Scene {
         this.load.image('arrowR', 'src/image/button/arrowR.jpg');
 
         this.load.image('arrowL', 'src/image/button/arrowL.jpg');
+
+        this.load.image('start', 'src/image/button/start.png');
+
+        this.load.audio('selectShuriken', 'src/sound/selectShuriken.mp3');
     }
 
     create() {
@@ -102,6 +110,8 @@ class Select extends Phaser.Scene {
         shuriken3.anims.play('shuriken3Ani', true);
         //-----------------------------------------------------------------
 
+        selectShuriken = this.sound.add('selectShuriken').setVolume(0.5);
+
         //-----------------------------------------------------------------ArrowL
         arrowL = this.physics.add.image(450, 360, 'arrowL')
             .setScale(0.15);
@@ -139,30 +149,51 @@ class Select extends Phaser.Scene {
             selectNum++;
         });
         //-----------------------------------------------------------------
+
+        startButton = this.physics.add.image(625, 500, 'start')
+            .setScale(0.5)
+            .setSize(480, 127)
+            .setOffset(10, 7);
+        startButton.setInteractive();
+
+        startButton.on('pointerover', () => {
+            startButton.setScale(0.6);
+        })
+
+        startButton.on('pointerout', () => {
+            startButton.setScale(0.5);
+        })
+
+        startButton.on('pointerdown', () => {
+            startButton.setScale(0.5);
+            this.scene.start('Select');
+        })
+
     }
 
     update(delta, time) {
+        //-----------------------------------------------------------------Check selectNum
         console.log(selectNum);
-        if (selectNum % 3 === 2) {
+        if (selectNum % 3 == 1) {
             shuriken1.setVisible(1);
             shuriken2.setVisible();
             shuriken3.setVisible();
             selectedShuriken = "shuriken1"
             console.log(selectedShuriken);
-        } else if (selectNum % 3 === 1) {
+        } else if (selectNum % 3 == 2) {
             shuriken1.setVisible();
             shuriken2.setVisible(1);
             shuriken3.setVisible();
-            selectNum = "shuriken2"
+            selectedShuriken = "shuriken2"
             console.log(selectedShuriken);
         } else {
-            selectNum = "shuriken3"
             shuriken1.setVisible();
             shuriken2.setVisible();
             shuriken3.setVisible(1);
-            selectNum = "shuriken3"
+            selectedShuriken = "shuriken3"
             console.log(selectedShuriken);
         }
+        //-----------------------------------------------------------------
     }
 }
 export default Select;
