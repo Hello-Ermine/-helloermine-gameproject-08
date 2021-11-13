@@ -23,6 +23,9 @@ class MainMenu extends Phaser.Scene {
     }
 
     create() {
+        m_bg = this.sound.add('m_bg').setVolume(0.5);
+        m_bg.play({ loop: true });
+
         MainMenu_BG = this.add.image(650, 354, 'MainMenuBG')
             .setScale(0.7);
 
@@ -41,15 +44,16 @@ class MainMenu extends Phaser.Scene {
 
         start_button.on('pointerdown', () => {
             start_button.setScale(1);
+            m_bg.stop();
+            this.scene.start('Select');
         })
 
-        m_bg = this.sound.add('m_bg').setVolume(0.5);
 
-        m_bg.play({ loop: true });
     }
 
     update(delta, time) {
 
     }
 }
+
 export default MainMenu;
