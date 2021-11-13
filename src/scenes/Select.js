@@ -166,35 +166,35 @@ class Select extends Phaser.Scene {
 
         startButton.on('pointerdown', () => {
             startButton.setScale(0.5);
-            //this.scene.start('Select');
+            this.scene.start('test');
         })
 
     }
 
     update(delta, time) {
         //-----------------------------------------------------------------Check selectNum
-        console.log(selectNum);
+        //console.log(selectNum);
         if (selectNum % 3 == 1) {
             shuriken1.setVisible(1);
             shuriken2.setVisible();
             shuriken3.setVisible();
             selectedShuriken = "shuriken1"
-            console.log(selectedShuriken);
+                //console.log(selectedShuriken);
         } else if (selectNum % 3 == 2) {
             shuriken1.setVisible();
             shuriken2.setVisible(1);
             shuriken3.setVisible();
             selectedShuriken = "shuriken2"
-            console.log(selectedShuriken);
+                //console.log(selectedShuriken);
         } else {
             shuriken1.setVisible();
             shuriken2.setVisible();
             shuriken3.setVisible(1);
             selectedShuriken = "shuriken3"
-            console.log(selectedShuriken);
+                //console.log(selectedShuriken);
         }
         //-----------------------------------------------------------------
     }
 }
-export default { selectedShuriken };
-export default Select;
+export default Select
+export { selectedShuriken };

@@ -2,6 +2,7 @@ import 'phaser';
 import Phaser from 'phaser';
 import MainMenu from './scenes/MainMenu';
 import Select from './scenes/Select';
+import test from './scenes/test';
 
 
 const config = {
@@ -19,7 +20,7 @@ const config = {
         }
     },
     scene: [
-        // MainMenu,
+        MainMenu,
         Select,
         test
     ],

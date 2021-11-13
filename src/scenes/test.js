@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { selectedShuriken } from "./Select"
+import { selectedShuriken } from "./Select.js"
 
 class test extends Phaser.Scene {
     constructor(test) {
