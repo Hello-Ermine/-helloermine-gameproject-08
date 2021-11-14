@@ -39,16 +39,16 @@ let cursor;
 let typeOfShurikenP1;
 let typeOfShurikenP2;
 
-let directionP1;
-let directionP2;
+let directionP1 = 'right';
+let directionP2 = 'left';
 
 let player1;
 let player2;
 
-class te extends Phaser.Scene {
+class GameScene extends Phaser.Scene {
     constructor(test) {
         super({
-            key: 'test'
+            key: 'GameScene'
         });
     }
 
@@ -137,7 +137,7 @@ class te extends Phaser.Scene {
         bg.setOrigin(0, 0);
         bg.setScale(0.67);
 
-        m_bg = this.sound.add('soundBG').setVolume(0.2);
+        m_bg = this.sound.add('soundBG').setVolume(0.1);
         m_bg.play({ loop: true });
 
         //----------------------------------------------------------------------Player1
@@ -345,36 +345,36 @@ class te extends Phaser.Scene {
             R.destroy();
             player2HealthBar--;
             if (player2HealthBar <= 0) {
-                console.log('Player1 Win');
+                //console.log('Player1 Win');
             }
-            console.log('Health Player2 : ' + player2HealthBar);
+            // console.log('Health Player2 : ' + player2HealthBar);
         })
 
         this.physics.add.overlap(shurikenGroupP1L, player2, (S, R) => {
             R.destroy();
             player2HealthBar--;
             if (player2HealthBar <= 0) {
-                console.log('Player1 Win');
+                //console.log('Player1 Win');
             }
-            console.log('Health Player2 : ' + player2HealthBar);
+            //console.log('Health Player2 : ' + player2HealthBar);
         })
 
         this.physics.add.overlap(shurikenGroupP2R, player1, (S, R) => {
             R.destroy();
             player1HealthBar--;
             if (player1HealthBar <= 0) {
-                console.log('Player2 Win');
+                //console.log('Player2 Win');
             }
-            console.log('Health Player1 : ' + player1HealthBar);
+            //console.log('Health Player1 : ' + player1HealthBar);
         })
 
         this.physics.add.overlap(shurikenGroupP2L, player1, (S, R) => {
             R.destroy();
             player1HealthBar--;
             if (player1HealthBar <= 0) {
-                console.log('Player2 Win');
+                //console.log('Player2 Win');
             }
-            console.log('Health Player1 : ' + player1HealthBar);
+            // console.log('Health Player1 : ' + player1HealthBar);
         })
 
         this.physics.add.overlap(shurikenGroupP1L, shurikenGroupP2L, (S, R) => {
@@ -618,4 +618,4 @@ class te extends Phaser.Scene {
     }
 }
 
-export default te;
+export default GameScene;

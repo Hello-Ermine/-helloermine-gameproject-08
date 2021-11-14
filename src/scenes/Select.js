@@ -294,7 +294,7 @@ class Select extends Phaser.Scene {
         startButton.on('pointerdown', () => {
             startButton.setScale(0.5);
             m_bg.stop();
-            this.scene.start('test');
+            this.scene.start('GameScene');
         })
 
     }
