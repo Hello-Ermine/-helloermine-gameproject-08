@@ -5,12 +5,16 @@ import { selectedShurikenP2 } from "./Select.js"
 let bg;
 let m_bg;
 
+let Check;
+
 let keyW;
 let keyA;
-let keyS;
 let keyD;
+let keyS;
 
 let cursor;
+
+let directionP1;
 
 let player1;
 let player2;
@@ -266,38 +270,23 @@ class test extends Phaser.Scene {
     update(delta, time) {
         //console.log("PLayer 1 : " + selectedShurikenP1);
         //console.log("Player 2 : " + selectedShurikenP2);
+        //player1
         if (keyW.isDown) {
-            player1.setVelocityY(-500);
-            player1.anims.play('player1JumpR', true);
+            player1.anims.play('player2JumpL', true);
         } else if (keyS.isDown) {
             player1.setVelocityY(500);
         } else {
             player1.setVelocityY(0);
         }
         if (keyA.isDown) {
+            player1.anims.play('player1L', true);
             player1.setVelocityX(-500);
         } else if (keyD.isDown) {
+            player1.anims.play('player1R', true);
             player1.setVelocityX(500);
         } else {
-            player1.setSize(40, 85)
-                .setOffset(30, 50);
             player1.anims.play('player1Stop', true);
             player1.setVelocityX(0);
-        }
-
-        if (cursor.up.isDown) {
-            player2.setVelocityY(-500);
-        } else if (cursor.down.isDown) {
-            player2.setVelocityY(500);
-        } else {
-            player2.setVelocityY(0);
-        }
-        if (cursor.left.isDown) {
-            player2.setVelocityX(-500);
-        } else if (cursor.right.isDown) {
-            player2.setVelocityX(500);
-        } else {
-            player2.setVelocityX(0);
         }
     }
 }
