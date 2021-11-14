@@ -101,7 +101,8 @@ class test extends Phaser.Scene {
         //----------------------------------------------------------------------Player1
         player1 = this.physics.add.sprite(200, 600, 'player1R')
             .setScale(2)
-            .setOffset(200, 200);
+            .setSize(46, 85)
+            .setOffset(45, 50);
 
         player1.setCollideWorldBounds(true)
 
@@ -178,7 +179,9 @@ class test extends Phaser.Scene {
 
         //----------------------------------------------------------------------Player2
         player2 = this.physics.add.sprite(200, 600, 'player2R')
-            .setScale(2);
+            .setScale(2)
+            .setSize(46, 85)
+            .setOffset(45, 50);
         player2.setCollideWorldBounds(true)
 
         this.anims.create({ //Stop
@@ -265,6 +268,7 @@ class test extends Phaser.Scene {
         //console.log("Player 2 : " + selectedShurikenP2);
         if (keyW.isDown) {
             player1.setVelocityY(-500);
+            player1.anims.play('player1JumpR', true);
         } else if (keyS.isDown) {
             player1.setVelocityY(500);
         } else {
@@ -275,7 +279,25 @@ class test extends Phaser.Scene {
         } else if (keyD.isDown) {
             player1.setVelocityX(500);
         } else {
+            player1.setSize(40, 85)
+                .setOffset(30, 50);
+            player1.anims.play('player1Stop', true);
             player1.setVelocityX(0);
+        }
+
+        if (cursor.up.isDown) {
+            player2.setVelocityY(-500);
+        } else if (cursor.down.isDown) {
+            player2.setVelocityY(500);
+        } else {
+            player2.setVelocityY(0);
+        }
+        if (cursor.left.isDown) {
+            player2.setVelocityX(-500);
+        } else if (cursor.right.isDown) {
+            player2.setVelocityX(500);
+        } else {
+            player2.setVelocityX(0);
         }
     }
 }
