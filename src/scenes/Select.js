@@ -290,19 +290,19 @@ class Select extends Phaser.Scene {
             shuriken2_P1.setVisible();
             shuriken3_P1.setVisible();
             selectedShurikenP1 = "shuriken1"
-            console.log("Player 1 : " + selectedShurikenP1);
+                // console.log("Player 1 : " + selectedShurikenP1);
         } else if (selectNumP1 % 3 == 2) {
             shuriken1_P1.setVisible();
             shuriken2_P1.setVisible(1);
             shuriken3_P1.setVisible();
             selectedShurikenP1 = "shuriken2"
-            console.log("Player 1 : " + selectedShurikenP1);
+                // console.log("Player 1 : " + selectedShurikenP1);
         } else {
             shuriken1_P1.setVisible();
             shuriken2_P1.setVisible();
             shuriken3_P1.setVisible(1);
             selectedShurikenP1 = "shuriken3"
-            console.log("Player 1 : " + selectedShurikenP1);
+                // console.log("Player 1 : " + selectedShurikenP1);
         }
 
         if (selectNumP2 % 3 == 1) {
@@ -310,19 +310,19 @@ class Select extends Phaser.Scene {
             shuriken2_P2.setVisible();
             shuriken3_P2.setVisible();
             selectedShurikenP2 = "shuriken1"
-            console.log("Player 2 : " + selectedShurikenP2);
+                //  console.log("Player 2 : " + selectedShurikenP2);
         } else if (selectNumP2 % 3 == 2) {
             shuriken1_P2.setVisible();
             shuriken2_P2.setVisible(1);
             shuriken3_P2.setVisible();
             selectedShurikenP2 = "shuriken2"
-            console.log("Player 2 : " + (selectedShurikenP2));
+                //  console.log("Player 2 : " + (selectedShurikenP2));
         } else {
             shuriken1_P2.setVisible();
             shuriken2_P2.setVisible();
             shuriken3_P2.setVisible(1);
             selectedShurikenP2 = "shuriken3"
-            console.log("Player 2 : " + selectedShurikenP2);
+                //  console.log("Player 2 : " + selectedShurikenP2);
         }
         //-----------------------------------------------------------------
     }
