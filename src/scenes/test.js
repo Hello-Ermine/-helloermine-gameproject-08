@@ -1,5 +1,6 @@
 import Phaser from "phaser";
-import { selectedShuriken } from "./Select.js"
+import { selectedShurikenP1 } from "./Select.js"
+import { selectedShurikenP2 } from "./Select.js"
 
 class test extends Phaser.Scene {
     constructor(test) {
@@ -17,7 +18,8 @@ class test extends Phaser.Scene {
 
     }
     update(delta, time) {
-        console.log(selectedShuriken);
+        console.log("PLayer 1 : " + selectedShurikenP1);
+        console.log("Player 2 : " + selectedShurikenP2);
     }
 }
 
