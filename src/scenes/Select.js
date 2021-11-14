@@ -44,12 +44,12 @@ class Select extends Phaser.Scene {
 
         this.load.spritesheet('shuriken2', 'src/image/bullet/shuriken2.png', {
             frameWidth: 169.7,
-            frameElement: 210
+            frameHeight: 210
         });
 
         this.load.spritesheet('shuriken3', 'src/image/bullet/shuriken3.png', {
             frameWidth: 170.125,
-            frameElement: 183
+            frameHeight: 183
         });
 
         this.load.image('arrowR', 'src/image/button/arrowR.jpg');

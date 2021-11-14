@@ -1,6 +1,6 @@
 import Phaser from "phaser";
-import { selectedShurikenP1 } from "./Select.js"
-import { selectedShurikenP2 } from "./Select.js"
+import { selectedShurikenP1 } from "./Select";
+import { selectedShurikenP2 } from "./Select";
 
 class test extends Phaser.Scene {
     constructor(test) {
@@ -19,12 +19,12 @@ class test extends Phaser.Scene {
         } else if (selectedShurikenP1 == 'shuriken2') {
             this.load.spritesheet('shurikenP1', 'src/image/bullet/shuriken2.png', {
                 frameWidth: 169.7,
-                frameElement: 210
+                frameHeight: 210
             });
         } else {
             this.load.spritesheet('shurikenP1', 'src/image/bullet/shuriken3.png', {
                 frameWidth: 170.125,
-                frameElement: 183
+                frameHeight: 183
             });
         }
 
@@ -39,12 +39,12 @@ class test extends Phaser.Scene {
         } else if (selectedShurikenP2 == 'shuriken2') {
             this.load.spritesheet('shurikenP2', 'src/image/bullet/shuriken2.png', {
                 frameWidth: 169.7,
-                frameElement: 210
+                frameHeight: 210
             });
         } else {
             this.load.spritesheet('shurikenP2', 'src/image/bullet/shuriken3.png', {
                 frameWidth: 170.125,
-                frameElement: 183
+                frameHeight: 183
             });
         }
         //--------------------------------------------------------------------------//Player2
@@ -56,8 +56,8 @@ class test extends Phaser.Scene {
 
     }
     update(delta, time) {
-        //console.log("PLayer 1 : " + selectedShurikenP1);
-        //console.log("Player 2 : " + selectedShurikenP2);
+        console.log("PLayer 1 : " + selectedShurikenP1);
+        console.log("Player 2 : " + selectedShurikenP2);
     }
 }
 
