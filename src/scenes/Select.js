@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { m_bg } from "./MainMenu"
 
 let s_bg;
 
@@ -58,6 +59,10 @@ class Select extends Phaser.Scene {
 
         this.load.image('selectText', 'src/image/BG/selectText.png');
 
+        this.load.image('player1Text', 'src/image/BG/player1Text.png');
+
+        this.load.image('player2Text', 'src/image/BG/player2Text.png');
+
         this.load.image('start', 'src/image/button/start.png');
 
         this.load.audio('selectShuriken', 'src/sound/selectShuriken.mp3');
@@ -71,6 +76,12 @@ class Select extends Phaser.Scene {
 
         this.add.image(620, 100, 'selectText')
             .setScale(0.5);
+
+        this.add.image(320, 250, 'player1Text')
+            .setScale(0.4);
+
+        this.add.image(940, 250, 'player2Text')
+            .setScale(0.4);
 
         //-----------------------------------------------------------------PLayer1
 
@@ -282,6 +293,7 @@ class Select extends Phaser.Scene {
 
         startButton.on('pointerdown', () => {
             startButton.setScale(0.5);
+            m_bg.stop();
             this.scene.start('test');
         })
 

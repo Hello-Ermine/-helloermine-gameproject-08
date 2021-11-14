@@ -57,3 +57,4 @@ class MainMenu extends Phaser.Scene {
 }
 
 export default MainMenu;
+export { m_bg };

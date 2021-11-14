@@ -3,6 +3,10 @@ import { selectedShurikenP1 } from "./Select.js"
 import { selectedShurikenP2 } from "./Select.js"
 
 let bg;
+let m_bg;
+
+let player1;
+let player2;
 
 class test extends Phaser.Scene {
     constructor(test) {
@@ -53,12 +57,190 @@ class test extends Phaser.Scene {
 
         this.load.image('fightBG', 'src/image/fightBG/bgninja.jpg');
 
+        this.load.audio('soundBG', 'src/sound/fightBG.mp3');
+
+        //--------------------------------------------------------------------------player1
+        this.load.spritesheet('player1R', 'src/image/player/player1R.png', {
+            frameWidth: 120.6,
+            frameHeight: 172
+        });
+        this.load.spritesheet('player1L', 'src/image/player/player1L.png', {
+            frameWidth: 120.6,
+            frameHeight: 172
+        });
+        //--------------------------------------------------------------------------//player1
+
+        //--------------------------------------------------------------------------player2
+        this.load.spritesheet('player2R', 'src/image/player/player2R.png', {
+            frameWidth: 120.6,
+            frameHeight: 172
+        });
+        this.load.spritesheet('player2L', 'src/image/player/player2L.png', {
+            frameWidth: 120.6,
+            frameHeight: 172
+        });
+        //--------------------------------------------------------------------------//player2
+
     }
 
     create() {
         bg = this.add.image(0, -100, 'fightBG');
         bg.setOrigin(0, 0);
-        bg.setScale(0.68);
+        bg.setScale(0.67);
+
+        m_bg = this.sound.add('soundBG').setVolume(0.2);
+        m_bg.play({ loop: true });
+
+        //----------------------------------------------------------------------Player1
+        player1 = this.physics.add.sprite(200, 600, 'player1R')
+            .setScale(2);
+
+        this.anims.create({ //Stop
+            key: 'player1Stop',
+            frames: this.anims.generateFrameNumbers('player1R', {
+                start: 11,
+                end: 11
+            }),
+            duration: 500,
+            repeat: -1
+        });
+
+        this.anims.create({ //Left
+            key: 'player1L',
+            frames: this.anims.generateFrameNumbers('player1L', {
+                start: 7,
+                end: 11
+            }),
+            duration: 500,
+            repeat: -1
+        });
+
+        this.anims.create({ //Right
+            key: 'player1R',
+            frames: this.anims.generateFrameNumbers('player1R', {
+                start: 0,
+                end: 4
+            }),
+            duration: 500,
+            repeat: -1
+        });
+
+        this.anims.create({ //ShootRight
+            key: 'player1ShootR',
+            frames: this.anims.generateFrameNumbers('player1R', {
+                start: 5,
+                end: 8
+            }),
+            duration: 500,
+            repeat: -1
+        });
+
+        this.anims.create({ //ShootLeft
+            key: 'player1ShootL',
+            frames: this.anims.generateFrameNumbers('player1L', {
+                start: 3,
+                end: 6
+            }),
+            duration: 500,
+            repeat: -1
+        });
+
+        this.anims.create({ //JumpRight
+            key: 'player1JumpR',
+            frames: this.anims.generateFrameNumbers('player1R', {
+                start: 9,
+                end: 10
+            }),
+            duration: 500,
+            repeat: -1
+        });
+
+        this.anims.create({ //JumpLeft
+            key: 'player1JumpL',
+            frames: this.anims.generateFrameNumbers('player1L', {
+                start: 1,
+                end: 2
+            }),
+            duration: 500,
+            repeat: -1
+        });
+        //----------------------------------------------------------------------//Player1
+
+        //----------------------------------------------------------------------Player2
+        player2 = this.physics.add.sprite(200, 600, 'player2R')
+            .setScale(2);
+
+        this.anims.create({ //Stop
+            key: 'player2Stop',
+            frames: this.anims.generateFrameNumbers('player2R', {
+                start: 11,
+                end: 11
+            }),
+            duration: 500,
+            repeat: -1
+        });
+
+        this.anims.create({ //Left
+            key: 'player2L',
+            frames: this.anims.generateFrameNumbers('player2L', {
+                start: 7,
+                end: 11
+            }),
+            duration: 500,
+            repeat: -1
+        });
+
+        this.anims.create({ //Right
+            key: 'player2R',
+            frames: this.anims.generateFrameNumbers('player2R', {
+                start: 0,
+                end: 4
+            }),
+            duration: 500,
+            repeat: -1
+        });
+
+        this.anims.create({ //ShootRight
+            key: 'player2ShootR',
+            frames: this.anims.generateFrameNumbers('player2R', {
+                start: 5,
+                end: 8
+            }),
+            duration: 500,
+            repeat: -1
+        });
+
+        this.anims.create({ //ShootLeft
+            key: 'player2ShootL',
+            frames: this.anims.generateFrameNumbers('player2L', {
+                start: 3,
+                end: 6
+            }),
+            duration: 500,
+            repeat: -1
+        });
+
+        this.anims.create({ //JumpRight
+            key: 'player2JumpR',
+            frames: this.anims.generateFrameNumbers('player2R', {
+                start: 9,
+                end: 10
+            }),
+            duration: 500,
+            repeat: -1
+        });
+
+        this.anims.create({ //JumpLeft
+            key: 'player2JumpL',
+            frames: this.anims.generateFrameNumbers('player2L', {
+                start: 1,
+                end: 2
+            }),
+            duration: 500,
+            repeat: -1
+        });
+        //----------------------------------------------------------------------//Player2
+
     }
     update(delta, time) {
         //console.log("PLayer 1 : " + selectedShurikenP1);
