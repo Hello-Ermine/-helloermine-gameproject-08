@@ -31,7 +31,15 @@ let shurikenGroupP2R;
 let test1 = 0;
 let test2 = 0;
 
+let nP1 = 0;
+let nP2 = 0;
+
+let spaceI = 0;
+
 let cursor;
+
+let typeOfShurikenP1;
+let typeOfShurikenP2;
 
 let directionP1;
 let directionP2;
@@ -49,40 +57,52 @@ class te extends Phaser.Scene {
     preload() {
         //--------------------------------------------------------------------------Player1Shuriken
         if (selectedShurikenP1 == 'shuriken1') {
-            this.load.spritesheet('shurikenP1', 'src/image/bullet/shuriken1.png', {
+            this.load.spritesheet('shuriken1P1', 'src/image/bullet/shuriken1.png', {
                 frameWidth: 325,
                 frameHeight: 332
             });
+            typeOfShurikenP1 = 'shuriken1P1';
+            nP1 = 3;
         } else if (selectedShurikenP1 == 'shuriken2') {
-            this.load.spritesheet('shurikenP1', 'src/image/bullet/shuriken2.png', {
+            this.load.spritesheet('shuriken2P1', 'src/image/bullet/shuriken2.png', {
                 frameWidth: 169.7,
                 frameElement: 210
             });
+            typeOfShurikenP1 = 'shuriken2P1';
+            nP1 = 5;
         } else {
-            this.load.spritesheet('shurikenP1', 'src/image/bullet/shuriken3.png', {
+            this.load.spritesheet('shuriken3P1', 'src/image/bullet/shuriken3.png', {
                 frameWidth: 170.125,
                 frameElement: 183
             });
+            typeOfShurikenP1 = 'shuriken3P1';
+            nP1 = 7;
         }
 
         //--------------------------------------------------------------------------//Player1Shuriken
 
         //--------------------------------------------------------------------------Player2Shuriken
         if (selectedShurikenP2 == 'shuriken1') {
-            this.load.spritesheet('shurikenP2', 'src/image/bullet/shuriken1.png', {
+            this.load.spritesheet('shuriken1P2', 'src/image/bullet/shuriken1.png', {
                 frameWidth: 325,
                 frameHeight: 332
             });
+            typeOfShurikenP2 = 'shuriken1P1';
+            nP2 = 3;
         } else if (selectedShurikenP2 == 'shuriken2') {
-            this.load.spritesheet('shurikenP2', 'src/image/bullet/shuriken2.png', {
+            this.load.spritesheet('shuriken2P2', 'src/image/bullet/shuriken2.png', {
                 frameWidth: 169.7,
                 frameElement: 210
             });
+            typeOfShurikenP2 = 'shuriken2P2';
+            nP2 = 5;
         } else {
-            this.load.spritesheet('shurikenP2', 'src/image/bullet/shuriken3.png', {
+            this.load.spritesheet('shuriken3P2', 'src/image/bullet/shuriken3.png', {
                 frameWidth: 170.125,
                 frameElement: 183
             });
+            typeOfShurikenP2 = 'shuriken3P2';
+            nP2 = 7;
         }
         //--------------------------------------------------------------------------//Player2Shuriken
 
@@ -280,12 +300,22 @@ class te extends Phaser.Scene {
         //----------------------------------------------------------------------//Player2
 
         this.anims.create({
-            key: 'shurikenAni',
-            frames: this.anims.generateFrameNumbers('shurikenP1', {
+            key: 'shurikenAniP1',
+            frames: this.anims.generateFrameNumbers(typeOfShurikenP1, {
                 start: 0,
-                end: 3
+                end: nP1
             }),
-            duration: 350,
+            duration: 500,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'shurikenAniP2',
+            frames: this.anims.generateFrameNumbers(typeOfShurikenP2, {
+                start: 0,
+                end: nP2
+            }),
+            duration: 500,
             repeat: -1
         })
 
@@ -348,12 +378,12 @@ class te extends Phaser.Scene {
             }
         }
 
-        if (keySpace.isDown && delta >= (timeShuriken + delayShuriken)) {
+        if (keySpace.isDown) {
             test1 = 1;
             if (directionP1 === 'right') {
                 player1.anims.play('player1ShootR', true);
                 this.time.addEvent({
-                    delay: 500,
+                    delay: 0,
                     callback: function() {
                         player1.anims.play('player1Stop', true);
                         test1 = 0;
@@ -364,7 +394,7 @@ class te extends Phaser.Scene {
             } else {
                 player1.anims.play('player1ShootL', true);
                 this.time.addEvent({
-                    delay: 500,
+                    delay: 0,
                     callback: function() {
                         player1.anims.play('player1Stop', true);
                         test1 = 0;
@@ -375,11 +405,11 @@ class te extends Phaser.Scene {
             }
         }
 
-        if (Phaser.Input.Keyboard.JustDown(keySpace) && delta >= (timeShuriken + delayShuriken)) {
+        if (Phaser.Input.Keyboard.JustDown(keySpace)) {
             if (directionP1 === 'left') {
                 shurikenP1 = this.physics.add.sprite(player1.x, player1.y, 'shurikenP1');
                 shurikenP1.setSize(220, 220);
-                shurikenP1.anims.play('shurikenAni', true);
+                shurikenP1.anims.play('shurikenAniP1', true);
                 shurikenP1.setScale(0.2);
                 shurikenGroupP1L.add(shurikenP1);
                 shurikenGroupP1L.setVelocityX(-400);
@@ -389,7 +419,7 @@ class te extends Phaser.Scene {
             } else {
                 shurikenP1 = this.physics.add.sprite(player1.x, player1.y, 'shurikenP1');
                 shurikenP1.setSize(220, 220);
-                shurikenP1.anims.play('shurikenAni', true);
+                shurikenP1.anims.play('shurikenAniP1', true);
                 shurikenP1.setScale(0.2);
                 shurikenGroupP1R.add(shurikenP1);
                 shurikenGroupP1R.setVelocityX(400);
@@ -397,7 +427,6 @@ class te extends Phaser.Scene {
                 // .setScale(0.1);
                 // bulletR.setVelocityX(800);
             }
-            timeShuriken = delta;
         }
         //-----------------------------------------------------------------------------------------//player1
 
@@ -437,12 +466,12 @@ class te extends Phaser.Scene {
             }
         }
 
-        if (keyM.isDown && delta >= (timeShuriken + delayShuriken)) {
+        if (keyM.isDown) {
             test2 = 1;
             if (directionP2 === 'right') {
                 player2.anims.play('player2ShootR', true);
                 this.time.addEvent({
-                    delay: 500,
+                    delay: 0,
                     callback: function() {
                         player2.anims.play('player2Stop', true);
                         test2 = 0;
@@ -453,7 +482,7 @@ class te extends Phaser.Scene {
             } else {
                 player2.anims.play('player2ShootL', true);
                 this.time.addEvent({
-                    delay: 500,
+                    delay: 0,
                     callback: function() {
                         player2.anims.play('player2Stop', true);
                         test2 = 0;
@@ -464,26 +493,48 @@ class te extends Phaser.Scene {
             }
         }
 
-        if (Phaser.Input.Keyboard.JustDown(keyM) && delta >= (timeShuriken + delayShuriken)) {
+        if (Phaser.Input.Keyboard.JustDown(keyM)) {
             if (directionP2 === 'left') {
                 shurikenP2 = this.physics.add.sprite(player2.x, player2.y, 'shurikenP2');
                 shurikenP2.setSize(220, 220);
-                //shurikenP2.anims.play('shurikenAni', true);
+                shurikenP2.anims.play('shurikenAniP2', true);
                 shurikenP2.setScale(0.2);
                 shurikenGroupP2L.add(shurikenP2);
                 shurikenGroupP2L.setVelocityX(-400);
             } else {
                 shurikenP2 = this.physics.add.sprite(player2.x, player2.y, 'shurikenP2');
                 shurikenP2.setSize(220, 220);
-                //shurikenP2.anims.play('shurikenAni', true);
+                shurikenP2.anims.play('shurikenAniP2', true);
                 shurikenP2.setScale(0.2);
                 shurikenGroupP2R.add(shurikenP2);
                 shurikenGroupP2R.setVelocityX(400);
             }
-            timeShuriken = delta;
         }
         //-----------------------------------------------------------------------------------------//player2
 
+        for (let i = 0; i < shurikenGroupP1R.getChildren().length; i++) {
+            if (shurikenGroupP1R.getChildren()[i].x >= 1280) {
+                shurikenGroupP1R.getChildren()[i].destroy();
+            }
+        }
+
+        for (let k = 0; k < shurikenGroupP1L.getChildren().length; k++) {
+            if (shurikenGroupP1L.getChildren()[k].x <= 0) {
+                shurikenGroupP1L.getChildren()[k].destroy();
+            }
+        }
+
+        for (let j = 0; j < shurikenGroupP2R.getChildren().length; j++) {
+            if (shurikenGroupP2R.getChildren()[j].x >= 1280) {
+                shurikenGroupP2R.getChildren()[j].destroy();
+            }
+        }
+
+        for (let l = 0; l < shurikenGroupP2L.getChildren().length; l++) {
+            if (shurikenGroupP2L.getChildren()[l].x <= 0) {
+                shurikenGroupP2L.getChildren()[l].destroy();
+            }
+        }
 
     }
 }
