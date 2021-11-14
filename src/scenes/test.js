@@ -12,7 +12,7 @@ class test extends Phaser.Scene {
     }
 
     preload() {
-        //--------------------------------------------------------------------------Player1
+        //--------------------------------------------------------------------------Player1Shuriken
         if (selectedShurikenP1 == 'shuriken1') {
             this.load.spritesheet('shurikenP1', 'src/image/bullet/shuriken1.png', {
                 frameWidth: 325,
@@ -30,9 +30,9 @@ class test extends Phaser.Scene {
             });
         }
 
-        //--------------------------------------------------------------------------//Player1
+        //--------------------------------------------------------------------------//Player1Shuriken
 
-        //--------------------------------------------------------------------------Player2
+        //--------------------------------------------------------------------------Player2Shuriken
         if (selectedShurikenP2 == 'shuriken1') {
             this.load.spritesheet('shurikenP2', 'src/image/bullet/shuriken1.png', {
                 frameWidth: 325,
@@ -49,9 +49,10 @@ class test extends Phaser.Scene {
                 frameElement: 183
             });
         }
-        //--------------------------------------------------------------------------//Player2
+        //--------------------------------------------------------------------------//Player2Shuriken
 
         this.load.image('fightBG', 'src/image/fightBG/bgninja.jpg');
+
     }
 
     create() {
