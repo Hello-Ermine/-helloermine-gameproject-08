@@ -2,6 +2,8 @@ import Phaser from "phaser";
 import { selectedShurikenP1 } from "./Select.js"
 import { selectedShurikenP2 } from "./Select.js"
 
+let bg;
+
 class test extends Phaser.Scene {
     constructor(test) {
         super({
@@ -48,12 +50,14 @@ class test extends Phaser.Scene {
             });
         }
         //--------------------------------------------------------------------------//Player2
+
+        this.load.image('fightBG', 'src/image/fightBG/bgninja.jpg');
     }
 
     create() {
-        this.physics.add.sprite(200, 200, 'shurikenP1');
-        this.physics.add.sprite(700, 200, 'shurikenP2');
-
+        bg = this.add.image(0, -100, 'fightBG');
+        bg.setOrigin(0, 0);
+        bg.setScale(0.68);
     }
     update(delta, time) {
         //console.log("PLayer 1 : " + selectedShurikenP1);

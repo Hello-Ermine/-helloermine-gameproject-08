@@ -56,6 +56,8 @@ class Select extends Phaser.Scene {
 
         this.load.image('arrowL', 'src/image/button/arrowL.jpg');
 
+        this.load.image('selectText', 'src/image/BG/selectText.png');
+
         this.load.image('start', 'src/image/button/start.png');
 
         this.load.audio('selectShuriken', 'src/sound/selectShuriken.mp3');
@@ -66,6 +68,9 @@ class Select extends Phaser.Scene {
         s_bg = this.add.image(630, 400, 's_bg')
             .setScale(0.8);
         //-----------------------------------------------------------------
+
+        this.add.image(620, 100, 'selectText')
+            .setScale(0.5);
 
         //-----------------------------------------------------------------PLayer1
 
