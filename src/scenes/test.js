@@ -13,9 +13,6 @@ let keySpace;
 
 let keyM;
 
-let timeShuriken = 0;
-let delayShuriken = 400;
-
 let shurikenP1;
 let shurikenP2;
 
@@ -34,7 +31,8 @@ let test2 = 0;
 let nP1 = 0;
 let nP2 = 0;
 
-let spaceI = 0;
+let player1HealthBar = 10;
+let player2HealthBar = 10;
 
 let cursor;
 
@@ -222,7 +220,7 @@ class te extends Phaser.Scene {
         //----------------------------------------------------------------------//Player1
 
         //----------------------------------------------------------------------Player2
-        player2 = this.physics.add.sprite(200, 600, 'player2R')
+        player2 = this.physics.add.sprite(1100, 600, 'player2R')
             .setScale(2)
             .setSize(46, 85)
             .setOffset(45, 50);
@@ -342,6 +340,63 @@ class te extends Phaser.Scene {
     update(delta, time) {
         //console.log("PLayer 1 : " + selectedShurikenP1);
         //console.log("Player 2 : " + selectedShurikenP2);
+
+        this.physics.add.overlap(shurikenGroupP1R, player2, (S, R) => {
+            R.destroy();
+            player2HealthBar--;
+            if (player2HealthBar <= 0) {
+                console.log('Player1 Win');
+            }
+            console.log('Health Player2 : ' + player2HealthBar);
+        })
+
+        this.physics.add.overlap(shurikenGroupP1L, player2, (S, R) => {
+            R.destroy();
+            player2HealthBar--;
+            if (player2HealthBar <= 0) {
+                console.log('Player1 Win');
+            }
+            console.log('Health Player2 : ' + player2HealthBar);
+        })
+
+        this.physics.add.overlap(shurikenGroupP2R, player1, (S, R) => {
+            R.destroy();
+            player1HealthBar--;
+            if (player1HealthBar <= 0) {
+                console.log('Player2 Win');
+            }
+            console.log('Health Player1 : ' + player1HealthBar);
+        })
+
+        this.physics.add.overlap(shurikenGroupP2L, player1, (S, R) => {
+            R.destroy();
+            player1HealthBar--;
+            if (player1HealthBar <= 0) {
+                console.log('Player2 Win');
+            }
+            console.log('Health Player1 : ' + player1HealthBar);
+        })
+
+        this.physics.add.overlap(shurikenGroupP1L, shurikenGroupP2L, (S, R) => {
+            R.destroy();
+            S.destroy();
+        })
+
+        this.physics.add.overlap(shurikenGroupP1R, shurikenGroupP2R, (S, R) => {
+            R.destroy();
+            S.destroy();
+        })
+
+        this.physics.add.overlap(shurikenGroupP1L, shurikenGroupP2R, (S, R) => {
+            R.destroy();
+            S.destroy();
+        })
+
+        this.physics.add.overlap(shurikenGroupP1R, shurikenGroupP2L, (S, R) => {
+            R.destroy();
+            S.destroy();
+        })
+
         //-----------------------------------------------------------------------------------------player1
         if (test1 == 0) {
             if (keyW.isDown) {
@@ -407,20 +462,32 @@ class te extends Phaser.Scene {
 
         if (Phaser.Input.Keyboard.JustDown(keySpace)) {
             if (directionP1 === 'left') {
-                shurikenP1 = this.physics.add.sprite(player1.x, player1.y, 'shurikenP1');
+                shurikenP1 = this.physics.add.sprite(player1.x, player1.y, typeOfShurikenP1);
                 shurikenP1.setSize(220, 220);
                 shurikenP1.anims.play('shurikenAniP1', true);
-                shurikenP1.setScale(0.2);
+                if (selectedShurikenP1 == 'shuriken1') {
+                    shurikenP1.setScale(0.2);
+                } else if (selectedShurikenP1 == 'shuriken2') {
+                    shurikenP1.setScale(0.4);
+                } else if (selectedShurikenP1 == 'shuriken3') {
+                    shurikenP1.setScale(0.5);
+                }
                 shurikenGroupP1L.add(shurikenP1);
                 shurikenGroupP1L.setVelocityX(-400);
                 // bulletL = this.physics.add.image(player1.x - 100, player1.y, 'bullet')
                 // .setScale(0.1);
                 // bulletL.setVelocityX(-800);
             } else {
-                shurikenP1 = this.physics.add.sprite(player1.x, player1.y, 'shurikenP1');
+                shurikenP1 = this.physics.add.sprite(player1.x, player1.y, typeOfShurikenP1);
                 shurikenP1.setSize(220, 220);
                 shurikenP1.anims.play('shurikenAniP1', true);
-                shurikenP1.setScale(0.2);
+                if (selectedShurikenP1 == 'shuriken1') {
+                    shurikenP1.setScale(0.2);
+                } else if (selectedShurikenP1 == 'shuriken2') {
+                    shurikenP1.setScale(0.4);
+                } else if (selectedShurikenP1 == 'shuriken3') {
+                    shurikenP1.setScale(0.5);
+                }
                 shurikenGroupP1R.add(shurikenP1);
                 shurikenGroupP1R.setVelocityX(400);
                 // bulletR = this.physics.add.image(player1.x + 100, player1.y, 'bulletR')
@@ -495,17 +562,29 @@ class te extends Phaser.Scene {
 
         if (Phaser.Input.Keyboard.JustDown(keyM)) {
             if (directionP2 === 'left') {
-                shurikenP2 = this.physics.add.sprite(player2.x, player2.y, 'shurikenP2');
+                shurikenP2 = this.physics.add.sprite(player2.x, player2.y, typeOfShurikenP2);
                 shurikenP2.setSize(220, 220);
                 shurikenP2.anims.play('shurikenAniP2', true);
-                shurikenP2.setScale(0.2);
+                if (selectedShurikenP2 == 'shuriken1') {
+                    shurikenP2.setScale(0.2);
+                } else if (selectedShurikenP2 == 'shuriken2') {
+                    shurikenP2.setScale(0.4);
+                } else if (selectedShurikenP2 == 'shuriken3') {
+                    shurikenP2.setScale(0.5);
+                }
                 shurikenGroupP2L.add(shurikenP2);
                 shurikenGroupP2L.setVelocityX(-400);
             } else {
-                shurikenP2 = this.physics.add.sprite(player2.x, player2.y, 'shurikenP2');
+                shurikenP2 = this.physics.add.sprite(player2.x, player2.y, typeOfShurikenP2);
                 shurikenP2.setSize(220, 220);
                 shurikenP2.anims.play('shurikenAniP2', true);
-                shurikenP2.setScale(0.2);
+                if (selectedShurikenP2 == 'shuriken1') {
+                    shurikenP2.setScale(0.2);
+                } else if (selectedShurikenP2 == 'shuriken2') {
+                    shurikenP2.setScale(0.4);
+                } else if (selectedShurikenP2 == 'shuriken3') {
+                    shurikenP2.setScale(0.5);
+                }
                 shurikenGroupP2R.add(shurikenP2);
                 shurikenGroupP2R.setVelocityX(400);
             }
