@@ -5,6 +5,13 @@ import { selectedShurikenP2 } from "./Select.js"
 let bg;
 let m_bg;
 
+let keyW;
+let keyA;
+let keyS;
+let keyD;
+
+let cursor;
+
 let player1;
 let player2;
 
@@ -93,7 +100,10 @@ class test extends Phaser.Scene {
 
         //----------------------------------------------------------------------Player1
         player1 = this.physics.add.sprite(200, 600, 'player1R')
-            .setScale(2);
+            .setScale(2)
+            .setOffset(200, 200);
+
+        player1.setCollideWorldBounds(true)
 
         this.anims.create({ //Stop
             key: 'player1Stop',
@@ -169,6 +179,7 @@ class test extends Phaser.Scene {
         //----------------------------------------------------------------------Player2
         player2 = this.physics.add.sprite(200, 600, 'player2R')
             .setScale(2);
+        player2.setCollideWorldBounds(true)
 
         this.anims.create({ //Stop
             key: 'player2Stop',
@@ -241,10 +252,31 @@ class test extends Phaser.Scene {
         });
         //----------------------------------------------------------------------//Player2
 
+        cursor = this.input.keyboard.createCursorKeys();
+
+        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+
     }
     update(delta, time) {
         //console.log("PLayer 1 : " + selectedShurikenP1);
         //console.log("Player 2 : " + selectedShurikenP2);
+        if (keyW.isDown) {
+            player1.setVelocityY(-500);
+        } else if (keyS.isDown) {
+            player1.setVelocityY(500);
+        } else {
+            player1.setVelocityY(0);
+        }
+        if (keyA.isDown) {
+            player1.setVelocityX(-500);
+        } else if (keyD.isDown) {
+            player1.setVelocityX(500);
+        } else {
+            player1.setVelocityX(0);
+        }
     }
 }
 
