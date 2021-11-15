@@ -384,7 +384,7 @@ class GameScene extends Phaser.Scene {
                 }
             }
             if (player2HealthBar <= 0) {
-                //console.log('Player1 Win');
+                this.scene.start('Player1Win');
             }
             // console.log('Health Player2 : ' + player2HealthBar);
         })
@@ -400,6 +400,7 @@ class GameScene extends Phaser.Scene {
                 }
             }
             if (player2HealthBar <= 0) {
+                this.scene.start('Player1Win');
                 //console.log('Player1 Win');
             }
             //console.log('Health Player2 : ' + player2HealthBar);
@@ -416,6 +417,7 @@ class GameScene extends Phaser.Scene {
                 }
             }
             if (player1HealthBar <= 0) {
+                this.scene.start('Player2Win');
                 //console.log('Player2 Win');
             }
             //console.log('Health Player1 : ' + player1HealthBar);
@@ -432,6 +434,7 @@ class GameScene extends Phaser.Scene {
                 }
             }
             if (player1HealthBar <= 0) {
+                this.scene.start('Player2Win');
                 //console.log('Player2 Win');
             }
             //console.log('Health Player1 : ' + player1HealthBar);
@@ -683,10 +686,14 @@ class GameScene extends Phaser.Scene {
             }
         }
 
-        // setTimeout(function() { countScene++ }, 5000);
-        // if (countScene >= 1) {
-        //     this.scene.start('Select');
-        // }
+        setTimeout(function() { countScene++ }, 60000);
+        if (countScene >= 1) {
+            if (player1HealthBar > player2HealthBar) {
+                this.scene.start('Player1Win');
+            } else if (player1HealthBar < player2HealthBar) {
+                this.scene.start('Player2Win');
+            }
+        }
 
         //-----------------------------------------------------------------------------------------//player2
 
@@ -715,6 +722,8 @@ class GameScene extends Phaser.Scene {
         }
 
     }
+
 }
 
 export default GameScene;
+export { m_bg };
