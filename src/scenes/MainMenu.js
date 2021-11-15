@@ -47,8 +47,6 @@ class MainMenu extends Phaser.Scene {
             //m_bg.stop();
             this.scene.start('Select');
         })
-
-
     }
 
     update(delta, time) {
