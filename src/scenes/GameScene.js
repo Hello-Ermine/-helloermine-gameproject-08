@@ -45,6 +45,11 @@ let directionP2 = 'left';
 let player1;
 let player2;
 
+let countP1 = 0;
+let countP2 = 0;
+
+let countScene = 0;
+
 class GameScene extends Phaser.Scene {
     constructor(test) {
         super({
@@ -399,9 +404,19 @@ class GameScene extends Phaser.Scene {
 
         //-----------------------------------------------------------------------------------------player1
         if (test1 == 0) {
-            if (keyW.isDown) {
-                player1.setVelocityY(-500);
-                player1.anims.play('player1JumpR', true);
+            if (Phaser.Input.Keyboard.JustDown(keyW)) {
+                countP1++;
+                if (countP1 <= 5) {
+                    if (directionP1 == 'right') {
+                        player1.x = player2.x + 100;
+                    } else {
+                        player1.x = player2.x - 100;
+                    }
+                } else {
+                    player1.x = player1.x;
+                    setTimeout(function() { countP1 = 0, console.log(countP1) }, 5000);
+                }
+                console.log('countP1 = ' + countP1);
             } else if (keyS.isDown) {
                 player1.setVelocityY(500);
                 player1.anims.play('player1Stop', true);
@@ -417,7 +432,6 @@ class GameScene extends Phaser.Scene {
                 //     bulletL.setVelocityX(-500);
                 // }
                 directionP1 = 'left'
-
             } else if (keyD.isDown) {
                 player1.setVelocityX(500);
                 player1.anims.play('player1R', true);
@@ -500,8 +514,18 @@ class GameScene extends Phaser.Scene {
         //-----------------------------------------------------------------------------------------player2
         if (test2 == 0) {
             if (cursor.up.isDown) {
-                player2.setVelocityY(-500);
-                player2.anims.play('player2JumpR', true);
+                countP2++;
+                if (countP2 <= 5) {
+                    if (directionP1 == 'right') {
+                        player2.x = player1.x + 100;
+                    } else {
+                        player2.x = player1.x - 100;
+                    }
+                } else {
+                    player2.x = player2.x;
+                    setTimeout(function() { countP2 = 0, console.log(countP2) }, 5000);
+                }
+                console.log('countP1 = ' + countP2);
             } else if (cursor.down.isDown) {
                 player2.setVelocityY(500);
                 player2.anims.play('player2Stop', true);
@@ -589,6 +613,12 @@ class GameScene extends Phaser.Scene {
                 shurikenGroupP2R.setVelocityX(400);
             }
         }
+
+        setTimeout(function() { countScene++ }, 90000);
+        if (countScene >= 1) {
+            this.scene.start('Select');
+        }
+
         //-----------------------------------------------------------------------------------------//player2
 
         for (let i = 0; i < shurikenGroupP1R.getChildren().length; i++) {
