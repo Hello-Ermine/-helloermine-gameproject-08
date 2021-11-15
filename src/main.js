@@ -3,6 +3,8 @@ import Phaser from 'phaser';
 import MainMenu from './scenes/MainMenu';
 import Select from './scenes/Select';
 import GameScene from './scenes/GameScene';
+import Player1Win from './scenes/Player1Win';
+import Player2Win from './scenes/Player2Win';
 
 
 const config = {
@@ -22,7 +24,9 @@ const config = {
     scene: [
         MainMenu,
         Select,
-        GameScene
+        GameScene,
+        Player1Win,
+        Player2Win
     ],
 
 };
