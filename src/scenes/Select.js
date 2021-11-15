@@ -1,21 +1,32 @@
 import Phaser from "phaser";
+import { m_bg } from "./MainMenu"
 
 let s_bg;
 
-let shuriken1;
-let shuriken2;
-let shuriken3;
+let shuriken1_P1;
+let shuriken2_P1;
+let shuriken3_P1;
 
-let arrowL;
-let arrowR;
+let shuriken1_P2;
+let shuriken2_P2;
+let shuriken3_P2;
+
+let arrowLP1;
+let arrowRP1;
+
+let arrowLP2;
+let arrowRP2;
 
 let startButton;
 
-let selectNum = 100;
+let selectNumP1 = 100;
+let selectNumP2 = 100;
 
-let selectedShuriken = 'shuriken1';
+let selectedShurikenP1 = 'shuriken1';
+let selectedShurikenP2 = 'shuriken1';
 
-let selectShuriken;
+let selectShurikenP1;
+let selectShurikenP2;
 
 class Select extends Phaser.Scene {
     constructor(test) {
@@ -46,6 +57,12 @@ class Select extends Phaser.Scene {
 
         this.load.image('arrowL', 'src/image/button/arrowL.jpg');
 
+        this.load.image('selectText', 'src/image/BG/selectText.png');
+
+        this.load.image('player1Text', 'src/image/BG/player1Text.png');
+
+        this.load.image('player2Text', 'src/image/BG/player2Text.png');
+
         this.load.image('start', 'src/image/button/start.png');
 
         this.load.audio('selectShuriken', 'src/sound/selectShuriken.mp3');
@@ -57,10 +74,21 @@ class Select extends Phaser.Scene {
             .setScale(0.8);
         //-----------------------------------------------------------------
 
-        //-----------------------------------------------------------------Shuriken1
-        shuriken1 = this.physics.add.sprite(640, 350, 'shuriken1')
+        this.add.image(620, 100, 'selectText')
             .setScale(0.5);
-        shuriken1.setVisible(1);
+
+        this.add.image(320, 250, 'player1Text')
+            .setScale(0.4);
+
+        this.add.image(940, 250, 'player2Text')
+            .setScale(0.4);
+
+        //-----------------------------------------------------------------PLayer1
+
+        //-----------------------------------------------------------------Shuriken1
+        shuriken1_P1 = this.physics.add.sprite(340, 350, 'shuriken1')
+            .setScale(0.5);
+        shuriken1_P1.setVisible(1);
 
         this.anims.create({
             key: 'shuriken1Ani',
@@ -72,12 +100,12 @@ class Select extends Phaser.Scene {
             repeat: -1
         })
 
-        shuriken1.anims.play('shuriken1Ani', true);
+        shuriken1_P1.anims.play('shuriken1Ani', true);
         //-----------------------------------------------------------------
 
         //-----------------------------------------------------------------Shuriken2
-        shuriken2 = this.physics.add.sprite(620, 330, 'shuriken2');
-        shuriken2.setVisible();
+        shuriken2_P1 = this.physics.add.sprite(320, 330, 'shuriken2');
+        shuriken2_P1.setVisible();
 
         this.anims.create({
             key: 'shuriken2Ani',
@@ -89,13 +117,13 @@ class Select extends Phaser.Scene {
             repeat: -1
         })
 
-        shuriken2.anims.play('shuriken2Ani', true);
+        shuriken2_P1.anims.play('shuriken2Ani', true);
         //-----------------------------------------------------------------
 
         //-----------------------------------------------------------------Shuriken3
-        shuriken3 = this.physics.add.sprite(610, 330, 'shuriken3')
+        shuriken3_P1 = this.physics.add.sprite(310, 330, 'shuriken3')
             .setScale(1);
-        shuriken3.setVisible();
+        shuriken3_P1.setVisible();
 
         this.anims.create({
             key: 'shuriken3Ani',
@@ -107,48 +135,147 @@ class Select extends Phaser.Scene {
             repeat: -1
         })
 
-        shuriken3.anims.play('shuriken3Ani', true);
+        shuriken3_P1.anims.play('shuriken3Ani', true);
         //-----------------------------------------------------------------
 
-        selectShuriken = this.sound.add('selectShuriken').setVolume(0.5);
+        selectShurikenP1 = this.sound.add('selectShuriken').setVolume(0.5);
 
         //-----------------------------------------------------------------ArrowL
-        arrowL = this.physics.add.image(450, 360, 'arrowL')
+        arrowLP1 = this.physics.add.image(150, 360, 'arrowL')
             .setScale(0.15);
-        arrowL.setInteractive();
+        arrowLP1.setInteractive();
 
-        arrowL.on('pointerover', () => {
-            arrowL.setScale(0.2);
+        arrowLP1.on('pointerover', () => {
+            arrowLP1.setScale(0.2);
         });
 
-        arrowL.on('pointerout', () => {
-            arrowL.setScale(0.15);
+        arrowLP1.on('pointerout', () => {
+            arrowLP1.setScale(0.15);
         });
 
-        arrowL.on('pointerdown', () => {
-            arrowL.setScale(0.15);
-            selectNum--;
+        arrowLP1.on('pointerdown', () => {
+            arrowLP1.setScale(0.15);
+            selectNumP1--;
         });
         //-----------------------------------------------------------------
 
         //-----------------------------------------------------------------ArrowR
-        arrowR = this.physics.add.image(800, 360, 'arrowR')
+        arrowRP1 = this.physics.add.image(500, 360, 'arrowR')
             .setScale(0.15);
-        arrowR.setInteractive();
+        arrowRP1.setInteractive();
 
-        arrowR.on('pointerover', () => {
-            arrowR.setScale(0.2);
+        arrowRP1.on('pointerover', () => {
+            arrowRP1.setScale(0.2);
         });
 
-        arrowR.on('pointerout', () => {
-            arrowR.setScale(0.15);
+        arrowRP1.on('pointerout', () => {
+            arrowRP1.setScale(0.15);
         });
 
-        arrowR.on('pointerdown', () => {
-            arrowR.setScale(0.15);
-            selectNum++;
+        arrowRP1.on('pointerdown', () => {
+            arrowRP1.setScale(0.15);
+            selectNumP1++;
         });
         //-----------------------------------------------------------------
+
+        //-----------------------------------------------------------------//Player1
+
+        //-----------------------------------------------------------------PLayer2
+
+        //-----------------------------------------------------------------Shuriken1
+        shuriken1_P2 = this.physics.add.sprite(940, 350, 'shuriken1')
+            .setScale(0.5);
+        shuriken1_P2.setVisible(1);
+
+        this.anims.create({
+            key: 'shuriken1Ani',
+            frames: this.anims.generateFrameNumbers('shuriken1', {
+                start: 0,
+                end: 3
+            }),
+            duration: 350,
+            repeat: -1
+        })
+
+        shuriken1_P2.anims.play('shuriken1Ani', true);
+        //-----------------------------------------------------------------
+
+        //-----------------------------------------------------------------Shuriken2
+        shuriken2_P2 = this.physics.add.sprite(940, 330, 'shuriken2');
+        shuriken2_P2.setVisible();
+
+        this.anims.create({
+            key: 'shuriken2Ani',
+            frames: this.anims.generateFrameNumbers('shuriken2', {
+                start: 0,
+                end: 6
+            }),
+            duration: 500,
+            repeat: -1
+        })
+
+        shuriken2_P2.anims.play('shuriken2Ani', true);
+        //-----------------------------------------------------------------
+
+        //-----------------------------------------------------------------Shuriken3
+        shuriken3_P2 = this.physics.add.sprite(940, 330, 'shuriken3')
+            .setScale(1);
+        shuriken3_P2.setVisible();
+
+        this.anims.create({
+            key: 'shuriken3Ani',
+            frames: this.anims.generateFrameNumbers('shuriken3', {
+                start: 0,
+                end: 7
+            }),
+            duration: 1000,
+            repeat: -1
+        })
+
+        shuriken3_P2.anims.play('shuriken3Ani', true);
+        //-----------------------------------------------------------------
+
+        selectShurikenP1 = this.sound.add('selectShuriken').setVolume(0.5);
+
+        //-----------------------------------------------------------------ArrowL
+        arrowLP2 = this.physics.add.image(750, 360, 'arrowL')
+            .setScale(0.15);
+        arrowLP2.setInteractive();
+
+        arrowLP2.on('pointerover', () => {
+            arrowLP2.setScale(0.2);
+        });
+
+        arrowLP2.on('pointerout', () => {
+            arrowLP2.setScale(0.15);
+        });
+
+        arrowLP2.on('pointerdown', () => {
+            arrowLP2.setScale(0.15);
+            selectNumP2--;
+        });
+        //-----------------------------------------------------------------
+
+        //-----------------------------------------------------------------ArrowR
+        arrowRP2 = this.physics.add.image(1130, 360, 'arrowR')
+            .setScale(0.15);
+        arrowRP2.setInteractive();
+
+        arrowRP2.on('pointerover', () => {
+            arrowRP2.setScale(0.2);
+        });
+
+        arrowRP2.on('pointerout', () => {
+            arrowRP2.setScale(0.15);
+        });
+
+        arrowRP2.on('pointerdown', () => {
+            arrowRP2.setScale(0.15);
+            selectNumP2++;
+        });
+        //-----------------------------------------------------------------
+
+        //-----------------------------------------------------------------//Player2
 
         startButton = this.physics.add.image(625, 500, 'start')
             .setScale(0.5)
@@ -166,7 +293,8 @@ class Select extends Phaser.Scene {
 
         startButton.on('pointerdown', () => {
             startButton.setScale(0.5);
-            this.scene.start('test');
+            m_bg.stop();
+            this.scene.start('GameScene');
         })
 
     }
@@ -174,27 +302,48 @@ class Select extends Phaser.Scene {
     update(delta, time) {
         //-----------------------------------------------------------------Check selectNum
         //console.log(selectNum);
-        if (selectNum % 3 == 1) {
-            shuriken1.setVisible(1);
-            shuriken2.setVisible();
-            shuriken3.setVisible();
-            selectedShuriken = "shuriken1"
-                //console.log(selectedShuriken);
-        } else if (selectNum % 3 == 2) {
-            shuriken1.setVisible();
-            shuriken2.setVisible(1);
-            shuriken3.setVisible();
-            selectedShuriken = "shuriken2"
-                //console.log(selectedShuriken);
+        if (selectNumP1 % 3 == 1) {
+            shuriken1_P1.setVisible(1);
+            shuriken2_P1.setVisible();
+            shuriken3_P1.setVisible();
+            selectedShurikenP1 = "shuriken1"
+                // console.log("Player 1 : " + selectedShurikenP1);
+        } else if (selectNumP1 % 3 == 2) {
+            shuriken1_P1.setVisible();
+            shuriken2_P1.setVisible(1);
+            shuriken3_P1.setVisible();
+            selectedShurikenP1 = "shuriken2"
+                // console.log("Player 1 : " + selectedShurikenP1);
         } else {
-            shuriken1.setVisible();
-            shuriken2.setVisible();
-            shuriken3.setVisible(1);
-            selectedShuriken = "shuriken3"
-                //console.log(selectedShuriken);
+            shuriken1_P1.setVisible();
+            shuriken2_P1.setVisible();
+            shuriken3_P1.setVisible(1);
+            selectedShurikenP1 = "shuriken3"
+                // console.log("Player 1 : " + selectedShurikenP1);
+        }
+
+        if (selectNumP2 % 3 == 1) {
+            shuriken1_P2.setVisible(1);
+            shuriken2_P2.setVisible();
+            shuriken3_P2.setVisible();
+            selectedShurikenP2 = "shuriken1"
+                //  console.log("Player 2 : " + selectedShurikenP2);
+        } else if (selectNumP2 % 3 == 2) {
+            shuriken1_P2.setVisible();
+            shuriken2_P2.setVisible(1);
+            shuriken3_P2.setVisible();
+            selectedShurikenP2 = "shuriken2"
+                //  console.log("Player 2 : " + (selectedShurikenP2));
+        } else {
+            shuriken1_P2.setVisible();
+            shuriken2_P2.setVisible();
+            shuriken3_P2.setVisible(1);
+            selectedShurikenP2 = "shuriken3"
+                //  console.log("Player 2 : " + selectedShurikenP2);
         }
         //-----------------------------------------------------------------
     }
 }
 export default Select
-export { selectedShuriken };
+export { selectedShurikenP1 };
+export { selectedShurikenP2 };

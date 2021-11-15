@@ -2,7 +2,7 @@ import 'phaser';
 import Phaser from 'phaser';
 import MainMenu from './scenes/MainMenu';
 import Select from './scenes/Select';
-import test from './scenes/test';
+import GameScene from './scenes/GameScene';
 
 
 const config = {
@@ -22,7 +22,7 @@ const config = {
     scene: [
         MainMenu,
         Select,
-        test
+        GameScene
     ],
 
 };
