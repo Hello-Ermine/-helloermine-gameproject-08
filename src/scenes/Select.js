@@ -66,6 +66,7 @@ class Select extends Phaser.Scene {
         this.load.image('start', 'src/image/button/start.png');
 
         this.load.audio('selectShuriken', 'src/sound/selectShuriken.mp3');
+
     }
 
     create() {
@@ -155,6 +156,7 @@ class Select extends Phaser.Scene {
 
         arrowLP1.on('pointerdown', () => {
             arrowLP1.setScale(0.15);
+            selectShurikenP1.play({ loop: false });
             selectNumP1--;
         });
         //-----------------------------------------------------------------
@@ -174,6 +176,7 @@ class Select extends Phaser.Scene {
 
         arrowRP1.on('pointerdown', () => {
             arrowRP1.setScale(0.15);
+            selectShurikenP1.play({ loop: false });
             selectNumP1++;
         });
         //-----------------------------------------------------------------
@@ -252,6 +255,7 @@ class Select extends Phaser.Scene {
 
         arrowLP2.on('pointerdown', () => {
             arrowLP2.setScale(0.15);
+            selectShurikenP1.play({ loop: false });
             selectNumP2--;
         });
         //-----------------------------------------------------------------
@@ -271,6 +275,7 @@ class Select extends Phaser.Scene {
 
         arrowRP2.on('pointerdown', () => {
             arrowRP2.setScale(0.15);
+            selectShurikenP1.play({ loop: false });
             selectNumP2++;
         });
         //-----------------------------------------------------------------

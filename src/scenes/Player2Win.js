@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import { m_bg } from "./GameScene"
 
-let win;
+let win2;
 let bg;
 
 let Menu;
@@ -46,11 +46,12 @@ class Player2Win extends Phaser.Scene {
 
         Menu.on('pointerdown', () => {
             Menu.setScale(1);
-            this.scene.start('MainMenu');
+            win2.stop();
+            location.reload();
         });
 
-        win = this.sound.add('win').setVolume(0.2);
-        win.play({ loop: false });
+        win2 = this.sound.add('win').setVolume(0.2);
+        win2.play({ loop: false });
 
         this.add.image(350, 300, 'player2Win');
         this.add.image(350, 600, 'player2WinText').setScale(0.5);
@@ -62,3 +63,4 @@ class Player2Win extends Phaser.Scene {
 }
 
 export default Player2Win;
+export { win2 };

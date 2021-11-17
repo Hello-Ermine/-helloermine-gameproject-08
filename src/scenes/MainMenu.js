@@ -1,4 +1,6 @@
 import Phaser from "phaser";
+import { win1 } from "./Player1Win"
+import { win2 } from "./Player2Win"
 
 let MainMenu_BG;
 
@@ -47,6 +49,8 @@ class MainMenu extends Phaser.Scene {
             //m_bg.stop();
             this.scene.start('Select');
         })
+
+
     }
 
     update(delta, time) {
