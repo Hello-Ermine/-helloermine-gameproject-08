@@ -347,7 +347,7 @@ class GameScene extends Phaser.Scene {
                 start: 0,
                 end: nP1
             }),
-            duration: 500,
+            duration: 200,
             repeat: -1
         })
 
@@ -357,7 +357,7 @@ class GameScene extends Phaser.Scene {
                 start: 0,
                 end: nP2
             }),
-            duration: 500,
+            duration: 200,
             repeat: -1
         })
 
