@@ -482,7 +482,6 @@ class GameScene extends Phaser.Scene {
                     if (directionP1 == 'right') {
                         player1.x = player2.x + 100;
                     } else {
-                        tar
                         player1.x = player2.x - 100;
                     }
                 } else {
